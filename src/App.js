@@ -27,6 +27,15 @@ class App extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.setState({
+      contacts: this.state.contacts.concat({
+        id: this.state.contacts.length + 1,
+        contactName: this.state.contactName,
+        contactPhone: this.state.contactPhone,
+        contactEmail: this.state.contactEmail,
+        contactCategories: this.state.contactCategories
+      })
+    });
   };
 
   handleChange = event => {
@@ -65,15 +74,12 @@ class App extends Component {
             value={this.state.contactCategories}
             onChange={this.handleChange}
           />
-          <button>Add</button>
+          <button onClick={this.handleSubmit}>
+            Add
+          </button>
         </form>
 
         <ul>
-          <li>
-            <p><strong>John Connor</strong></p>
-            <p>700-400-300, jconnor@skynet.com</p>
-            <p>[family], [starred]</p>
-          </li>
           {
             this.state.contacts.map(
               contact =>
