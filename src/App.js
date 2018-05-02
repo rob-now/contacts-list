@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 
 class App extends Component {
+
+  handleSubmit = event => {
+    event.preventDefault();
+  };
+
   render() {
     return (
       <div>
         <h2>Contacts</h2>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input placeholder={'First and last name'}/>
           <input placeholder={'Phone number'}/>
           <input placeholder={'Email address'}/>
