@@ -1,16 +1,31 @@
 import React, {Component} from 'react'
 
+const redFont = {
+  color: "red"
+};
 
 class ContactForm extends Component {
   state = {
     contactName: '',
     contactPhone: '',
     contactEmail: '',
-    contactCategories: ''
+    contactCategories: '',
+    formError: null
   };
 
   handleSubmit = event => {
     event.preventDefault();
+
+    if (this.state.contactName.trim() === '' ||
+      this.state.contactPhone.trim() === '' ||
+      this.state.contactEmail.trim() === '' ||
+      this.state.contactCategories.trim() === ''
+    ) {
+      this.setState({
+        formError: new Error('In order to add contact you need to fill in all inputs.')
+      });
+      return;
+    }
 
     this.props.addContact(
       this.state.contactName,
@@ -29,7 +44,8 @@ class ContactForm extends Component {
 
   handleChange = event => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      formError: null
     })
   };
 
@@ -63,6 +79,7 @@ class ContactForm extends Component {
         <button onClick={this.handleSubmit}>
           Add
         </button>
+        {this.state.formError && <p style={redFont}>{this.state.formError.message}</p>}
       </form>
     )
   }
