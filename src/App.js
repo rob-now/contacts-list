@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import ContactForm from './ContactForm'
+import ContactList from './ContactList'
 
 class App extends Component {
 
@@ -54,27 +55,10 @@ class App extends Component {
       <div>
         <h2>Contacts</h2>
         <ContactForm addContact={this.addContact}/>
-        <ul>
-          {
-            this.state.contacts.map(
-              contact =>
-                <li key={contact.id}>
-                  <p><strong>{contact.contactName}</strong></p>
-                  <p>{contact.contactPhone}, {contact.contactEmail}</p>
-                  <p>{contact.contactCategories.split(',').map(
-                    (category, index) => {
-                      const categoryDisplay = `[${category.trim()}]`;
-                      const categoriesLastIndex = contact.contactCategories.split(',').length - 1;
-                      return index === categoriesLastIndex ? categoryDisplay : categoryDisplay + `, `;
-                    }
-                  )}</p>
-                  <button onClick={() => this.removeContact(contact.id)}>
-                    Delete
-                  </button>
-                </li>
-            )
-          }
-        </ul>
+        <ContactList
+          contacts={this.state.contacts}
+          removeContact={this.removeContact}
+        />
       </div>
     );
   }
