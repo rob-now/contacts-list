@@ -8,26 +8,26 @@ class App extends Component {
     contactEmail: '',
     contactCategories: '',
     contacts: [
-      // {
-      //   id: 1,
-      //   contactName: 'Abc Def',
-      //   contactPhone: '123-456-789',
-      //   contactEmail: 'abc@abc.com',
-      //   contactCategories: 'abc, def'
-      // },
-      // {
-      //   id: 2,
-      //   contactName: 'Ghi Jkl',
-      //   contactPhone: '987-654-321',
-      //   contactEmail: 'ghi@ghi.com',
-      //   contactCategories: 'ghi , jkl jjj,ooo'
-      // }
+      {
+        id: 1,
+        contactName: 'Abc Def',
+        contactPhone: '123-456-789',
+        contactEmail: 'abc@abc.com',
+        contactCategories: 'abc, def'
+      },
+      {
+        id: 2,
+        contactName: 'Ghi Jkl',
+        contactPhone: '987-654-321',
+        contactEmail: 'ghi@ghi.com',
+        contactCategories: 'ghi , jkl jjj,ooo'
+      }
     ]
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    // Using ES6 to destruct objects as function parameters
+    // Using ES6: destructuring objects as function parameters
     this.setState(({contactName, contactPhone, contactEmail, contactCategories, contacts}) =>
       ({
         contactName: '',
@@ -53,6 +53,16 @@ class App extends Component {
     })
   };
 
+  removeContact = contactId => {
+    this.setState(
+      ({contacts}) => ({
+        contacts: contacts.filter(
+          ({id}) =>
+            id !== contactId
+        )
+      })
+    )
+  };
 
   render() {
     return (
@@ -102,6 +112,9 @@ class App extends Component {
                       return index === categoriesLastIndex ? categoryDisplay : categoryDisplay + `, `;
                     }
                   )}</p>
+                  <button onClick={() => this.removeContact(contact.id)}>
+                    Delete
+                  </button>
                 </li>
             )
           }
