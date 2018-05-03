@@ -27,17 +27,24 @@ class App extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.setState({
-      contacts: this.state.contacts.concat({
-        id: this.state.contacts.length === 0
-          ? 1
-          : Math.max(...this.state.contacts.map(contact => contact.id)) + 1,
-        contactName: this.state.contactName,
-        contactPhone: this.state.contactPhone,
-        contactEmail: this.state.contactEmail,
-        contactCategories: this.state.contactCategories
+    // Using ES6 to destruct objects as function parameters
+    this.setState(({contactName, contactPhone, contactEmail, contactCategories, contacts}) =>
+      ({
+        contactName: '',
+        contactPhone: '',
+        contactEmail: '',
+        contactCategories: '',
+        contacts: contacts.concat({
+          id: contacts.length === 0
+            ? 1
+            : Math.max(...contacts.map(contact => contact.id)) + 1,
+          contactName: contactName,
+          contactPhone: contactPhone,
+          contactEmail: contactEmail,
+          contactCategories: contactCategories
+        })
       })
-    });
+    )
   };
 
   handleChange = event => {
