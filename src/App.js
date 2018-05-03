@@ -8,20 +8,20 @@ class App extends Component {
     contactEmail: '',
     contactCategories: '',
     contacts: [
-      {
-        id: 1,
-        contactName: 'Abc Def',
-        contactPhone: '123-456-789',
-        contactEmail: 'abc@abc.com',
-        contactCategories: 'abc, def'
-      },
-      {
-        id: 2,
-        contactName: 'Ghi Jkl',
-        contactPhone: '987-654-321',
-        contactEmail: 'ghi@ghi.com',
-        contactCategories: 'ghi , jkl jjj,ooo'
-      }
+      // {
+      //   id: 1,
+      //   contactName: 'Abc Def',
+      //   contactPhone: '123-456-789',
+      //   contactEmail: 'abc@abc.com',
+      //   contactCategories: 'abc, def'
+      // },
+      // {
+      //   id: 2,
+      //   contactName: 'Ghi Jkl',
+      //   contactPhone: '987-654-321',
+      //   contactEmail: 'ghi@ghi.com',
+      //   contactCategories: 'ghi , jkl jjj,ooo'
+      // }
     ]
   };
 
@@ -29,7 +29,9 @@ class App extends Component {
     event.preventDefault();
     this.setState({
       contacts: this.state.contacts.concat({
-        id: this.state.contacts.length + 1,
+        id: this.state.contacts.length === 0
+          ? 1
+          : Math.max(...this.state.contacts.map(contact => contact.id)) + 1,
         contactName: this.state.contactName,
         contactPhone: this.state.contactPhone,
         contactEmail: this.state.contactEmail,
