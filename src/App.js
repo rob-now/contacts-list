@@ -1,12 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
+import ContactForm from './ContactForm'
 
 class App extends Component {
 
   state = {
-    contactName: '',
-    contactPhone: '',
-    contactEmail: '',
-    contactCategories: '',
     contacts: [
       {
         id: 1,
@@ -25,15 +22,9 @@ class App extends Component {
     ]
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    // Using ES6: destructuring objects as function parameters
-    this.setState(({contactName, contactPhone, contactEmail, contactCategories, contacts}) =>
-      ({
-        contactName: '',
-        contactPhone: '',
-        contactEmail: '',
-        contactCategories: '',
+  addContact = (contactName, contactPhone, contactEmail, contactCategories) => {
+    this.setState(
+      ({contacts}) => ({
         contacts: contacts.concat({
           id: contacts.length === 0
             ? 1
@@ -45,12 +36,6 @@ class App extends Component {
         })
       })
     )
-  };
-
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
   };
 
   removeContact = contactId => {
@@ -68,36 +53,7 @@ class App extends Component {
     return (
       <div>
         <h2>Contacts</h2>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            placeholder={'First and last name'}
-            name={'contactName'}
-            value={this.state.contactName}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder={'Phone number'}
-            name={'contactPhone'}
-            value={this.state.contactPhone}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder={'Email address'}
-            name={'contactEmail'}
-            value={this.state.contactEmail}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder={'Categories'}
-            name={'contactCategories'}
-            value={this.state.contactCategories}
-            onChange={this.handleChange}
-          />
-          <button onClick={this.handleSubmit}>
-            Add
-          </button>
-        </form>
-
+        <ContactForm addContact={this.addContact}/>
         <ul>
           {
             this.state.contacts.map(
