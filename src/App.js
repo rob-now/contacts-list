@@ -50,6 +50,21 @@ class App extends Component {
     )
   };
 
+  updateContact = (contactId, contactName, contactPhone, contactEmail, contactCategories) =>
+    this.setState({
+      contacts: this.state.contacts.map(contact =>
+        contact.id !== contactId
+          ? contact
+          : {
+            id: contact.id,
+            contactName: contactName,
+            contactPhone: contactPhone,
+            contactEmail: contactEmail,
+            contactCategories: contactCategories
+          }
+      )
+    });
+
   render() {
     return (
       <div>
