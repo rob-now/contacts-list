@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import ContactContent from './ContactContent'
+import ContactEditForm from './ContactEditForm'
 
 class ContactList extends Component {
 
@@ -12,8 +13,12 @@ class ContactList extends Component {
       editContactId: contactId
     });
 
+  exitEditMode = () =>
+    this.setState({
+      editContactId: null
+    });
+
   render() {
-    console.log(this.state.editContactId);
     return (
       <ul>
         {
@@ -22,7 +27,15 @@ class ContactList extends Component {
               <li key={contact.id}>
                 {
                   this.state.editContactId === contact.id
-                    ? <p>in edit</p>
+                    ? <ContactEditForm
+                      contactId={contact.id}
+                      contactName={contact.contactName}
+                      contactPhone={contact.contactPhone}
+                      contactEmail={contact.contactEmail}
+                      contactCategories={contact.contactCategories}
+                      updateContact={this.props.updateContact}
+                      exitEditMode={this.exitEditMode}
+                    />
                     : <ContactContent
                       contact={contact}
                       enterEditMode={this.enterEditMode}

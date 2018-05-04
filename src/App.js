@@ -73,6 +73,7 @@ class App extends Component {
         <ContactList
           contacts={this.state.contacts}
           removeContact={this.removeContact}
+          updateContact={this.updateContact}
         />
       </div>
     );
