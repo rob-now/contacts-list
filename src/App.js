@@ -5,22 +5,7 @@ import ContactList from './ContactList'
 class App extends Component {
 
   state = {
-    contacts: [
-      {
-        id: 1,
-        contactName: 'Abc Def',
-        contactPhone: '123-456-789',
-        contactEmail: 'abc@abc.com',
-        contactCategories: 'abc, def'
-      },
-      {
-        id: 2,
-        contactName: 'Ghi Jkl',
-        contactPhone: '987-654-321',
-        contactEmail: 'ghi@ghi.com',
-        contactCategories: 'ghi , jkl jjj,ooo'
-      }
-    ]
+    contacts: []
   };
 
   addContact = (contactName, contactPhone, contactEmail, contactCategories) => {
