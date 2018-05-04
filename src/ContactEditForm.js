@@ -81,8 +81,13 @@ class ContactEditForm extends Component {
           value={this.state.contactCategories}
           onChange={this.handleChange}
         />
-        <button onClick={this.handleSubmit}>
+        <button>
           Update
+        </button>
+        <button
+          type="button"
+          onClick={this.props.exitEditMode}>
+          Cancel
         </button>
         {this.state.formError && <p style={redFont}>{this.state.formError.message}</p>}
       </form>
