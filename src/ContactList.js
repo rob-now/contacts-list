@@ -1,4 +1,5 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
+import ContactContent from './ContactContent'
 
 class ContactList extends Component {
 
@@ -22,23 +23,11 @@ class ContactList extends Component {
                 {
                   this.state.editContactId === contact.id
                     ? <p>in edit</p>
-                    : <Fragment>
-                      <p><strong>{contact.contactName}</strong></p>
-                      <p>{contact.contactPhone}, {contact.contactEmail}</p>
-                      <p>{contact.contactCategories.split(',').map(
-                        (category, index) => {
-                          const categoryDisplay = `[${category.trim()}]`;
-                          const categoriesLastIndex = contact.contactCategories.split(',').length - 1;
-                          return index === categoriesLastIndex ? categoryDisplay : categoryDisplay + `, `;
-                        }
-                      )}</p>
-                      <button onClick={() => this.enterEditMode(contact.id)}>
-                        Edit
-                      </button>
-                      <button onClick={() => this.props.removeContact(contact.id)}>
-                        Delete
-                      </button>
-                    </Fragment>
+                    : <ContactContent
+                      contact={contact}
+                      enterEditMode={this.enterEditMode}
+                      removeContact={this.props.removeContact}
+                    />
                 }
               </li>
           )
